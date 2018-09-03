@@ -7,3 +7,6 @@ npm-*
 
 # package lock
 package-lock.json
+
+#uploaded file
+/public/uploaded

@@ -5,10 +5,15 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+const customResponse = require('./middlewares/customResponse')
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var projects = require('./routes/projects');
 
 var app = express();
+
+require('./config/mongoose')(app)
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,8 +27,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(customResponse)
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 app.use('/', routes);
 app.use('/users', users);
+app.use('/projects', projects)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

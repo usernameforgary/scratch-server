@@ -1,0 +1,47 @@
+{"message":"Info message","level":"info"}
+{"message":"Warning message","level":"warn"}
+{"message":"Info message","level":"info"}
+{"message":"Warning message","level":"warn"}
+{"level":"error","message":"login error, userExist.exec is not a function"}
+{"level":"error","message":"login error, userExist.exec is not a function"}
+{"level":"error","message":"login error, userExist.exec is not a function"}
+{"level":"error","message":"login error, userExist.exec is not a function"}
+{"level":"error","message":"login error, userExist.exec is not a function"}
+{"level":"error","message":"login error, userExist.exec is not a function"}
+{"level":"error","message":"login error, userExist.exec is not a function"}
+{"level":"error","message":"login error, userExist.exec is not a function"}
+{"level":"error","message":"login error, userExist.exec is not a function"}
+{"level":"error","message":"login error, userExist.exec is not a function"}
+{"level":"error","message":"login error, userExist.exec is not a function"}
+{"level":"error","message":"login error, userExist.exec is not a function"}
+{"level":"error","message":"login error, userExist.exec is not a function"}
+{"level":"error","message":"login error, userExist.exec is not a function"}
+{"level":"error","message":"login error, userExist.exec is not a function"}
+{"level":"error","message":"login error, userExist.exec is not a function"}
+{"level":"error","message":"login error, userExist.exec is not a function"}
+{"level":"error","message":"login error, userExist.exec is not a function"}
+{"level":"info","message":"password before save: U2FsdGVkX1/RymjJzI7WiGlkF9kgYwTz0XKzN/0hFU4="}
+{"level":"info","message":"password after save: U2FsdGVkX1/Cfi6gu31rLsMuzlUpu7QjWJ93aVHQQ3fE5Bs06DnSYWh70y/XVf7DGLr/FEc+qH9Lz7URIsRpmw=="}
+{"level":"error","message":"register catch error, user.setPass is not a function"}
+{"message":"psw before, U2FsdGVkX1+XoNHhsYaJNs4jBocGvUr3wpwhNcp6hN0=","level":"error"}
+{"message":"psw db, U2FsdGVkX1/Ftka5ZYvEPwVacbtBrtVS9oTnFWdFDGU=","level":"error"}
+{"message":"pwd before save, U2FsdGVkX1+msr+mnRsPksd+ersGydIiltSWDcVTrtQ=","level":"error"}
+{"message":"pwd after save, U2FsdGVkX1+msr+mnRsPksd+ersGydIiltSWDcVTrtQ=","level":"error"}
+{"message":"psw before, U2FsdGVkX1+j4KkKzVQmpbNsPEtVGm2zTJirT9R3W20=","level":"error"}
+{"message":"psw db, U2FsdGVkX1+msr+mnRsPksd+ersGydIiltSWDcVTrtQ=","level":"error"}
+{"message":"register pwd before save, U2FsdGVkX19d2rudOXws5umXTqvNaaobPjmX7jzdLFM=","level":"error"}
+{"message":"register pwd after save, U2FsdGVkX19d2rudOXws5umXTqvNaaobPjmX7jzdLFM=","level":"error"}
+{"message":"login psw before, U2FsdGVkX1+9u8hgXl2E2C9n2Q01kNKRVKDgM/mhLfM=","level":"error"}
+{"message":"login psw db, U2FsdGVkX19d2rudOXws5umXTqvNaaobPjmX7jzdLFM=","level":"error"}
+{"message":"login psw before, U2FsdGVkX18/CjDxOvAWEfbrUh1XR7oJJicx4BIAPKM=","level":"error"}
+{"message":"login psw db, U2FsdGVkX19d2rudOXws5umXTqvNaaobPjmX7jzdLFM=","level":"error"}
+{"message":"login psw before, U2FsdGVkX19IcwYNlMo0miwRXhHk7kijVEMCWzYzaKk=","level":"error"}
+{"message":"login psw db, U2FsdGVkX19d2rudOXws5umXTqvNaaobPjmX7jzdLFM=","level":"error"}
+{"message":"login psw before, U2FsdGVkX1+cmlB9o0COqj+od8Sn3hH7PBFpKqzQhnM=","level":"error"}
+{"message":"login psw db, 202cb962ac59075b964b07152d234b70","level":"error"}
+{"message":"login psw before, U2FsdGVkX1+3PTAKSyuxVf6T0LgMgcLpSggh5fimuIE=","level":"error"}
+{"message":"login psw db, U2FsdGVkX19d2rudOXws5umXTqvNaaobPjmX7jzdLFM=","level":"error"}
+{"message":"login psw before, U2FsdGVkX1+sc1TYy1PKzCgTPwlPczjGsOo5TU+jjq0=","level":"error"}
+{"message":"login psw db, 202cb962ac59075b964b07152d234b70","level":"error"}
+{"message":"login psw before, U2FsdGVkX1+eh4fuU+gaybIUGnY8Qo3OoQTpJbHwy5Q=","level":"error"}
+{"message":"login psw db, U2FsdGVkX19d2rudOXws5umXTqvNaaobPjmX7jzdLFM=","level":"error"}
