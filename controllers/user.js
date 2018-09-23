@@ -24,11 +24,7 @@ exports.login = async(req, res) => {
       res.preconditionFailed('用户名或密码不正确')
       return
     }
-    res.success({ user: {
-      id: dbUser._id,
-      userName: dbUser.username,
-      userProfileIconUrl: dbUser.userProfileIconUrl
-    }});
+    res.success({ user: dbUser});
   } catch(err) {
     logger.log('error', `login error, ${err.message}`)
     res.preconditionFailed(err.message)
@@ -62,11 +58,7 @@ exports.register = async(req, res) => {
 
   try {
     const insertUserRes = await saveUser(user)
-    res.success({ user: {
-      id: insertUserRes._id,
-      userName: insertUserRes.username,
-      userProfileIconUrl: insertUserRes.userProfileIconUrl
-    }});
+    res.success({ user: insertUserRes});
   } catch (err) {
     logger.log('error', `register catch error, ${err.message}`)
     res.preconditionFailed(err)

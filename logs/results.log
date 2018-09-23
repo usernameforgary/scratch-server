@@ -45,3 +45,4 @@
 {"message":"login psw db, 202cb962ac59075b964b07152d234b70","level":"error"}
 {"message":"login psw before, U2FsdGVkX1+eh4fuU+gaybIUGnY8Qo3OoQTpJbHwy5Q=","level":"error"}
 {"message":"login psw db, U2FsdGVkX19d2rudOXws5umXTqvNaaobPjmX7jzdLFM=","level":"error"}
+{"level":"error","message":"register catch error, document must have an _id before saving"}

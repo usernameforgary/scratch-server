@@ -1,10 +1,16 @@
-const { saveProject } = require('../repositories/project')
+const {
+  saveProject,
+  saveProjectTransaction,
+  updateProjectById,
+} = require('../repositories/project')
 const logger = require('../utilities/logger')
 const path = require('path')
 const multer = require('multer')
+const fs = require('fs')
 
 const PROJECT_PATH = path.join(__dirname, '../public/uploaded/')
-const PROJECT_URL = `/public/uploaded/`
+const PROJECT_URL = `/uploaded/`
+const PUBLIC_PATH = path.join(__dirname, '../public')
 
 function saveProjectToDisk(req, res, projectPath) {
   let fileName = ''
@@ -33,21 +39,73 @@ exports.save = async(req, res) => {
   try {
     const fileName = await saveProjectToDisk(req, res)
     const userId = req.body.userId
+    if(!userId) {
+      res.preconditionFailed(`项目保存失败, user id not provide`)
+      return
+    }
     const projectUrl = `${PROJECT_URL}${fileName}`
     try {
-      const saveRes = await saveProject({
-        userId: userId,
-        projectUrl: projectUrl
-      })
+      const projectName = fileName.substring(fileName.indexOf('_') + 1, fileName.lastIndexOf('.'))
+      const projectId = req.body.projectId
+      const saveAsCopy = req.body.saveAsCopy.toLowerCase() === 'true'
+      let projectRes = null;
+      if((projectId !== 'null') && (projectId !== '') && !saveAsCopy) {
+        console.dir(`......update exist project...`)
+        projectRes = await updateProjectById(projectId, {
+          projectName: projectName,
+          projectUrl: projectUrl
+        })
+      } else {
+        console.dir('.....save new project....')
+        projectRes = await saveProjectTransaction({
+          userId: userId,
+          projectUrl: projectUrl,
+          projectName: projectName
+        })
+      }
       res.success({
-        id: saveRes._id,
-        userId: saveRes.userId,
-        projectUrl: saveRes.projectUrl
+        userId: userId,
+        project: projectRes 
       })
     } catch(err) {
       res.preconditionFailed(`项目保存失败, db error: ${err.message}`)
     }
   } catch(err) {
     res.preconditionFailed(err.message || err)
+  }
+}
+
+exports.deleteById = async (req, res) => {
+  const projectId = req.body.projectId
+  if(!projectId) {
+    res.preconditionFailed(`Select project need to be deleted`)
+    return
+  }
+  try{
+    const updateRes = await updateProjectById(projectId, {is_active: false})
+    res.success({
+      projectId: projectId,
+      deleted: true
+    })
+  } catch(err) {
+    res.preconditionFailed(err.message || err)
+  }
+}
+
+exports.getContentById = async(req, res) => {
+  const project = req.body.project
+  if(!(project || project.projectUrl)) {
+    res.preconditionFailed(`No project or project id provider`)
+    return
+  }
+  const filePath = path.join(PUBLIC_PATH, project.projectUrl)
+  try {
+    const result = fs.readFileSync(filePath)
+    res.success({
+      result: result
+    })
+  } catch(e) {
+    console.dir(e)
+    res.preconditionFailed(`Read file failed`)
   }
 }

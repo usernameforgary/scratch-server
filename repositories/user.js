@@ -8,10 +8,17 @@ const saveUser = (data) => {
 }
 
 const findUserByEmail = (email) => {
-  return User.findOne({email: email})
+  return User.
+    findOne({email: email}).
+    populate({
+      path: 'projects',
+      match: { is_active: true},
+      options: { sort: { 'updatedAt': -1 } }
+    })
 }
 
 module.exports = {
   saveUser,
-  findUserByEmail
+  findUserByEmail,
+  User
 }
