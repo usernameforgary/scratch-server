@@ -2,6 +2,7 @@ const {
   saveProject,
   saveProjectTransaction,
   updateProjectById,
+  getSharedProjects,
 } = require('../repositories/project')
 const logger = require('../utilities/logger')
 const path = require('path')
@@ -92,6 +93,23 @@ exports.deleteById = async (req, res) => {
   }
 }
 
+exports.toggleShareById = async(req, res) => {
+  const projectId = req.body.projectId
+  const isPublic = req.body.isPublic
+  if(!projectId) {
+    res.preconditionFailed(`Select project need to be shared`)
+    return
+  }
+  try{
+    const updateRes = await updateProjectById(projectId, {is_public: isPublic})
+    res.success({
+      project: updateRes
+    })
+  } catch(err) {
+    res.preconditionFailed(err.message || err)
+  }
+}
+
 exports.getContentById = async(req, res) => {
   const project = req.body.project
   if(!(project || project.projectUrl)) {
@@ -107,5 +125,35 @@ exports.getContentById = async(req, res) => {
   } catch(e) {
     console.dir(e)
     res.preconditionFailed(`Read file failed`)
+  }
+}
+
+exports.getSharedProjects = async(req, res) => {
+  try {
+    const sharedProjects = await getSharedProjects()
+    res.success({
+      projects: sharedProjects
+    })
+  } catch(err) {
+    res.preconditionFailed(err.message || err)
+  }
+}
+
+exports.updateProjectDescription = async(req, res) => {
+  const project = req.body.project
+  if(!project) {
+    res.preconditionFailed(`No project or project id provider`)
+    return
+  }
+  try {
+    const updateRes = await updateProjectById(project._id, {
+      project_description: project.project_description,
+      operation_description: project.operation_description
+    })
+    res.success({
+      project: updateRes
+    })
+  } catch(err) {
+    res.preconditionFailed(err.message || err)
   }
 }

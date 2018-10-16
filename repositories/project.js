@@ -15,7 +15,7 @@ const saveProject = (data) => {
 }
 
 const updateProjectById = (projectId, updateData) => {
-  return Project.findByIdAndUpdate(projectId, updateData)
+  return Project.findByIdAndUpdate(projectId, updateData, {new: true})
 }
 
 const saveProjectTransaction = async(projectObject) => {
@@ -38,8 +38,17 @@ const saveProjectTransaction = async(projectObject) => {
   }
 }
 
+const getSharedProjects = async() => {
+  return Project.find({is_active: true, is_public: true}).sort({updatedAt: -1})
+    .populate({
+      path: 'userId',
+      select: 'username'
+    })
+}
+
 module.exports = {
   saveProject,
   saveProjectTransaction,
   updateProjectById,
+  getSharedProjects,
 }

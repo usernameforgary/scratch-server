@@ -17,8 +17,18 @@ const findUserByEmail = (email) => {
     })
 }
 
+const findOrAddUserReturnNew = (conditions, updates) => {
+  return User.findOneAndUpdate(conditions, updates, {new: true, upsert: true}).
+    populate({
+      path: 'projects',
+      match: { is_active: true},
+      options: { sort: { 'updatedAt': -1 } }
+    })
+}
+
 module.exports = {
   saveUser,
   findUserByEmail,
+  findOrAddUserReturnNew,
   User
 }

@@ -1,4 +1,4 @@
-const { saveUser, findUserByEmail} = require('../repositories/user')
+const { saveUser, findUserByEmail, findOrAddUserReturnNew } = require('../repositories/user')
 const logger = require('../utilities/logger')
 const crypto = require('../utilities/customCrypto')
 
@@ -25,6 +25,25 @@ exports.login = async(req, res) => {
       return
     }
     res.success({ user: dbUser});
+  } catch(err) {
+    logger.log('error', `login error, ${err.message}`)
+    res.preconditionFailed(err.message)
+  }
+}
+
+exports.userCookieLogin = async(req, res) => {
+  const { s_id, username, account, head_img } = req.body
+  if(!s_id) {
+    res.preconditionFailed('当前登录用户s_id未提供, 请重新登录')
+    return
+  }
+  try {
+    const user = await findOrAddUserReturnNew({s_id: s_id}, {
+      username: username,
+      account: account,
+      userProfileIconUrl: head_img
+    })
+    res.success({ user: user });
   } catch(err) {
     logger.log('error', `login error, ${err.message}`)
     res.preconditionFailed(err.message)
@@ -63,4 +82,15 @@ exports.register = async(req, res) => {
     logger.log('error', `register catch error, ${err.message}`)
     res.preconditionFailed(err)
   } 
+}
+
+exports.userLoginMock = async(req, res) => {
+  const {log_account, log_password} = req.body
+  res.send({
+    status: 1,
+    s_id: 'jimmy',
+    account: '13585923052',
+    head_img: '',
+    username: 'Jimmy'
+  })
 }
