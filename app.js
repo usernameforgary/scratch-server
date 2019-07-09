@@ -5,12 +5,15 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+
 const customResponse = require('./middlewares/customResponse')
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var projects = require('./routes/projects');
-//test add for branch b1
+
+//test add for branch master
+//test add 2 for branch master
 var app = express();
 
 require('./config/mongoose')(app)
